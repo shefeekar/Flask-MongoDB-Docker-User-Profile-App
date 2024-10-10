@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  mongo_db:
+    image: mongo:5.0
+    container_name: mongo_db
+    ports: 
+      - "27018:27017"
+    environment:
+      MONGO_INITDB_DATABASE: user_profiles # Creates a DB inside the container when running it
+    # If we don't specify a network, 'bridge' will be used to connect ALL created containers.
+    networks:
+      - flask-mongo-network # Override default network to connect only these 2 containers.
+  
+  flask_app:
+    build: ./flask-app
+    ports:
+      - "5000:5000"
+
+    # First start mongo_db service, then start flask_app
+    depends_on:
+      - mongo_db
+
+    # Use the same network as the mongo_db service
+    networks:
+      - flask-mongo-network
+
+
+networks:
+  flask-mongo-network:
+    driver: bridge
