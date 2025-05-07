@@ -5,19 +5,19 @@ services:
   ports:
     - "5000:5000" 
   networks:
-   - flask_net:
+   - flask_net
   depends_on:
    - db
  db:
    image: mongo 
-   containername: mongodb
+   container_name: mongodb
    ports:
     - "27017:27017" 
    networks:
-    - flask_net:
+    - flask_net
    volumes:
-    db_data: /data/db
+    db_data:/data/db
 volumes: 
-   db_data:
+   db_data
 networks:
-   flask_net: 
+    flask_net:
