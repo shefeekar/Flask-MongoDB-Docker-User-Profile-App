@@ -1,0 +1,23 @@
+version: "3.8"
+services:
+ web:
+  build: . 
+  ports:
+    - "5000:5000" 
+  networks:
+   - flask_net:
+  depends_on:
+   - db
+ db:
+   image: mongo 
+   containername: mongodb
+   ports:
+    - "27017:27017" 
+   networks:
+    - flask_net:
+   volumes:
+    db_data: /data/db
+volumes: 
+   db_data:
+networks:
+   flask_net: 
