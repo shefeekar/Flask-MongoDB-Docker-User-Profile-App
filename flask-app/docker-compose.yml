@@ -16,7 +16,7 @@ services:
    networks:
     - flask_net
    volumes:
-    db_data:/data/db
+     - db_data:/data/db
 volumes: 
    db_data
 networks:
